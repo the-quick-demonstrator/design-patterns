@@ -17,11 +17,6 @@ public class ReadWriteFacade {
 
     public ReadWriteFacade(File file) {
         this.file = file;
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void write(String content, boolean append) {
