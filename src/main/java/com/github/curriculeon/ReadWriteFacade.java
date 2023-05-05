@@ -35,7 +35,7 @@ public class ReadWriteFacade {
         final StringBuilder contents = new StringBuilder();
         try {
             final Scanner scanner = new Scanner(this.file);
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 final String currentLine = scanner.nextLine();
                 contents.append(currentLine);
                 contents.append("\n");
@@ -61,6 +61,7 @@ public class ReadWriteFacade {
         lines.forEach(line -> result.append(line).append("\n"));
         this.write(result.toString().replaceAll("$\n", ""), false);
     }
+
     public void replaceAllOccurrences(String stringToReplace, String replacementString) {
         final String contentToWrite = read().replaceAll(stringToReplace, replacementString);
         this.write(contentToWrite, false);
