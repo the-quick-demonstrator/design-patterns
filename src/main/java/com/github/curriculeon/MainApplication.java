@@ -1,8 +1,6 @@
 package com.github.curriculeon;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MainApplication {
@@ -26,10 +24,8 @@ public class MainApplication {
         }
         io.println("Number of Guesses: %s", numberOfGuesses);
 
-        final String currentProjectDirectory = System.getProperty("user.dir");
-        final String resourceDirectoryLocalPath = "/src/main/resources";
-        final String resourceDirectory = currentProjectDirectory + resourceDirectoryLocalPath;
-        final ReadWriteFacade rw = new ReadWriteFacade(resourceDirectory);
+        final File file = DirectoryReference.RESOURCES.getFile("/guesses.txt");
+        final ReadWriteFacade rw = new ReadWriteFacade(file);
         rw.write(numberOfGuesses.toString(), false);
     }
 }
