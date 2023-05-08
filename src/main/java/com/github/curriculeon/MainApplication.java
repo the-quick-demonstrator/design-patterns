@@ -5,8 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MainApplication {
     public static void main(String[] args) {
-        Integer numberOfGuesses = 0;
         final InputOutputFacade io = new InputOutputFacade();
+
+        Integer numberOfGuesses = 0;
         final Integer minInt = io.getIntegerInput("Enter a minimum value");
         final Integer maxInt = io.getIntegerInput("Enter a maximum value");
         final Integer randomValue = ThreadLocalRandom.current().nextInt(minInt, maxInt);

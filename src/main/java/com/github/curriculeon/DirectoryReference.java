@@ -23,4 +23,8 @@ public enum DirectoryReference {
         }
         return file;
     }
+
+    public ReadWriteFacade getReadWriteFacade(String fileName) {
+        return new ReadWriteFacade(getFile(fileName));
+    }
 }
