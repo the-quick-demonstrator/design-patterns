@@ -2,6 +2,7 @@ package com.github.curriculeon;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public interface RepositoryInterface<
         IdType extends Serializable,
@@ -18,8 +19,9 @@ public interface RepositoryInterface<
     default EntityType findById(IdType idOfEntityToFind) {
         return findAll()
                 .stream()
-                .filter(entity -> entity.getId() == idOfEntityToFind)
+                .filter(Objects::nonNull)
+                .filter(entity -> entity.getId().equals(idOfEntityToFind))
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 }
