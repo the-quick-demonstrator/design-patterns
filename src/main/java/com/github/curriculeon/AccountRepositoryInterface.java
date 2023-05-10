@@ -1,8 +1,8 @@
 package com.github.curriculeon;
 
-public class AccountRepository implements AccountRepositoryInterface {
+public interface AccountRepositoryInterface extends FileRepositoryInterface<Long, AccountEntity> {
     @Override
-    public AccountEntity parse(String line) {
+    default AccountEntity parse(String line) {
         final String[] fields = line.split(",");
         final Long id = Long.parseLong(fields[0]);
         final String name = fields[1];
