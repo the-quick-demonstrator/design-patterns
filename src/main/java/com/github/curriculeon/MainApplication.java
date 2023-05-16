@@ -1,32 +1,28 @@
 package com.github.curriculeon;
 
-import java.io.File;
-import java.util.concurrent.ThreadLocalRandom;
-
 public class MainApplication {
     public static void main(String[] args) {
         final InputOutputFacade io = new InputOutputFacade();
+        final AccountRepositoryFacade accountRepositoryFacade = new AccountRepositoryFacade();
 
-        Integer numberOfGuesses = 0;
-        final Integer minInt = io.getIntegerInput("Enter a minimum value");
-        final Integer maxInt = io.getIntegerInput("Enter a maximum value");
-        final Integer randomValue = ThreadLocalRandom.current().nextInt(minInt, maxInt);
-        while (true) {
-            final Integer guessInt = io.getIntegerInput("Enter a guess between %s and %s", minInt, maxInt);
-            numberOfGuesses++;
-            if (guessInt > randomValue) {
-                io.println("Guess a lower value");
-            } else if (guessInt < randomValue) {
-                io.println("Guess a higher value");
-            } else {
-                io.println("You guessed the correct value");
-                break;
+        io.println("Welcome to the Account Manager Menu!");
+        io.println("From here, you can select any of the following:");
+        final String accountMenuDecision = io.getStringInput("[ login ], [ create ], [ delete ]");
+        if("login".equalsIgnoreCase(accountMenuDecision)) {
+            final AccountEntity accountEntity = accountRepositoryFacade.readById();
+            io.println("Welcome to the Game Selection Menu!");
+            io.println("From here, you can select any of the following:");
+            final String gameSelectionMenu = io.getStringInput("[ guess ], [ high-low ]");
+            if("guess".equalsIgnoreCase(gameSelectionMenu)) {
+                new GuessGame(accountEntity).play();
+            } else if("high-low".equalsIgnoreCase(gameSelectionMenu)) {
+                new HighLowGame(accountEntity).play();
             }
+        } else if("create".equalsIgnoreCase(accountMenuDecision)) {
+            accountRepositoryFacade.add();
+        } else if("delete".equalsIgnoreCase(accountMenuDecision)) {
+            accountRepositoryFacade.delete();
         }
-        io.println("Number of Guesses: %s", numberOfGuesses);
 
-        final File file = DirectoryReference.RESOURCES.getFile("/guesses.txt");
-        final ReadWriteFacade rw = new ReadWriteFacade(file);
-        rw.write(numberOfGuesses.toString(), false);
     }
 }
