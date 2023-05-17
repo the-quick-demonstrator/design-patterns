@@ -1,6 +1,5 @@
 package com.github.curriculeon;
 
-import javax.swing.text.html.parser.Entity;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +22,7 @@ public interface CsvRepositoryInterface<
         return getReadWriteFacade()
                 .toLines()
                 .stream()
-                .map(line -> parse(line) )
+                .map(this::parse)
                 .collect(Collectors.toList());
     }
 
