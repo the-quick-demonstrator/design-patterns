@@ -1,5 +1,6 @@
 package com.github.curriculeon.arcade.numberguess;
 
+import com.github.curriculeon.utils.AnsiColor;
 import com.github.curriculeon.utils.DirectoryReference;
 import com.github.curriculeon.utils.InputOutputSocket;
 import com.github.curriculeon.utils.ReadWriteFacade;
@@ -28,7 +29,7 @@ public class NumberGuessGame implements InputOutputSocket {
     public void play() {
         for (NumberGuessPlayer player : players) {
             Integer numberOfGuesses = numberGuessEngine.play(player);
-            getInputOutputFacade().println("Number of Guesses: %s", numberOfGuesses);
+            getInputOutputFacade(AnsiColor.PURPLE).println("Number of Guesses: %s", numberOfGuesses);
 
             final File file = DirectoryReference.RESOURCES.getFile("/guesses.txt");
             final ReadWriteFacade rw = new ReadWriteFacade(file);
