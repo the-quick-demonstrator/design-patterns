@@ -1,5 +1,7 @@
 package com.github.curriculeon;
 
+import com.github.curriculeon.arcade.AccountEntity;
+import com.github.curriculeon.arcade.AccountRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
