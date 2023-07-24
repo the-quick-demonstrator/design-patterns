@@ -1,5 +1,7 @@
 package com.github.curriculeon;
 
+import com.github.curriculeon.utils.EntityInterface;
+
 public class AccountEntity implements EntityInterface<Long> {
     private Long id;
     private String name;

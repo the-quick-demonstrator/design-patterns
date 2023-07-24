@@ -1,5 +1,7 @@
 package com.github.curriculeon;
 
+import com.github.curriculeon.utils.CsvRepositoryInterface;
+
 public class AccountRepository implements CsvRepositoryInterface<Long, AccountEntity> {
 
     @Override

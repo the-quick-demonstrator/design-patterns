@@ -1,5 +1,9 @@
 package com.github.curriculeon;
 
+import com.github.curriculeon.utils.DirectoryReference;
+import com.github.curriculeon.utils.InputOutputFacade;
+import com.github.curriculeon.utils.ReadWriteFacade;
+
 import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
 
