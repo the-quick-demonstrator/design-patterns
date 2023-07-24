@@ -8,17 +8,24 @@ public class InputOutputFacade {
     private final InputStream in;
     private final PrintStream out;
 
+    private final AnsiColor ansiColor;
+
     public InputOutputFacade() {
         this(System.in, System.out);
     }
 
     public InputOutputFacade(InputStream in, PrintStream out) {
+        this(in, out, AnsiColor.BLACK);
+    }
+
+    public InputOutputFacade(InputStream in, PrintStream out, AnsiColor ansiColor) {
         this.in = in;
         this.out = out;
+        this.ansiColor = ansiColor;
     }
 
     public void print(String valueToBePrinted, Object... optionalStringFormatters) {
-        out.printf(valueToBePrinted, optionalStringFormatters);
+        out.printf(this.ansiColor.getColor() + valueToBePrinted, optionalStringFormatters);
     }
 
     public void println(String valueToBePrinted, Object... optionalStringFormatters) {
