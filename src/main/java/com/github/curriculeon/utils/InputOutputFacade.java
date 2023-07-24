@@ -14,6 +14,10 @@ public class InputOutputFacade {
         this(System.in, System.out);
     }
 
+    public InputOutputFacade(AnsiColor color) {
+        this(System.in, System.out, color);
+    }
+
     public InputOutputFacade(InputStream in, PrintStream out) {
         this(in, out, AnsiColor.BLACK);
     }
