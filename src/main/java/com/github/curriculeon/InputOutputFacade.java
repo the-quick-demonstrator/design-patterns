@@ -8,17 +8,28 @@ public class InputOutputFacade {
     private final InputStream in;
     private final PrintStream out;
 
+    private final AnsiCode ansiCode;
+
     public InputOutputFacade() {
         this(System.in, System.out);
     }
 
+    public InputOutputFacade(AnsiCode ansiCode) {
+        this(System.in, System.out, ansiCode);
+    }
+
     public InputOutputFacade(InputStream in, PrintStream out) {
+        this(in, out, AnsiCode.WHITE);
+    }
+
+    public InputOutputFacade(InputStream in, PrintStream out, AnsiCode ansiCode) {
         this.in = in;
         this.out = out;
+        this.ansiCode = ansiCode;
     }
 
     public void print(String valueToBePrinted, Object... optionalStringFormatters) {
-        out.printf(valueToBePrinted, optionalStringFormatters);
+        out.printf(ansiCode.getValue() + valueToBePrinted, optionalStringFormatters);
     }
 
     public void println(String valueToBePrinted, Object... optionalStringFormatters) {
@@ -36,7 +47,7 @@ public class InputOutputFacade {
         final String stringInput = this.getStringInput(prompt, optionalStringFormatters);
         try {
             return Double.parseDouble(stringInput);
-        } catch(NumberFormatException nfe) { // non-numeric value
+        } catch (NumberFormatException nfe) { // non-numeric value
             this.println("[ %s ] is an invalid input!", stringInput);
             this.println("Try inputting a numeric value!");
             return getDoubleInput(prompt, optionalStringFormatters); // prompt user again
@@ -47,7 +58,7 @@ public class InputOutputFacade {
         final String stringInput = this.getStringInput(prompt, optionalStringFormatters);
         try {
             return Long.parseLong(stringInput);
-        } catch(NumberFormatException nfe) { // non-numeric value
+        } catch (NumberFormatException nfe) { // non-numeric value
             this.println("[ %s ] is an invalid input!", stringInput);
             this.println("Try inputting a integer value!");
             return getLongInput(prompt, optionalStringFormatters); // prompt user again

@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MainApplication {
     public static void main(String[] args) {
-        final InputOutputFacade io = new InputOutputFacade();
+        final InputOutputFacade io = new InputOutputFacade(AnsiCode.CYAN);
 
         Integer numberOfGuesses = 0;
         final Integer minInt = io.getIntegerInput("Enter a minimum value");
